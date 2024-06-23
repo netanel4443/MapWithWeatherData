@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { act } from "react";
 import { LatLng } from "react-native-maps"
+import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Double, Float } from "react-native/Libraries/Types/CodegenTypes"
+import { DrawPolygonBtnState } from "./ui/redux/types";
 
 export type MarkerData = {
   coordinate: LatLng;
@@ -19,12 +21,18 @@ export interface MapState {
   markers: { [key: string]: MarkerData }
   polygons: { [key: string]: PolygonData[] }
   markersDataTexts: { [key: string]: string }
+  drawPolygonBtnState: DrawPolygonBtnState
 }
 
 const state: MapState = {
   markers: {},
   polygons: {},
-  markersDataTexts: {}
+  markersDataTexts: {},
+  drawPolygonBtnState: {
+    isDrawPolygonsEnabled: false,
+    backgroundColor: "green",
+    description: "Enable polygon drawing"
+  }
 }
 
 const mapSlice = createSlice({
@@ -70,13 +78,21 @@ const mapSlice = createSlice({
       //apply new state
       state = newState
     },
+    
+    setDrawPolygonBtnState: (state, action: PayloadAction<{newState: DrawPolygonBtnState}>) => {
+      const newState = Object.assign(state) as MapState
+      newState.drawPolygonBtnState = action.payload.newState
+
+      state = newState
+    }
   },
 });
 
 export const {
   addMarker,
   applyPolygonCoordinate,
-  buildSavedMarkersDataTexts
+  buildSavedMarkersDataTexts,
+  setDrawPolygonBtnState
 } = mapSlice.actions;
 
 export default mapSlice.reducer

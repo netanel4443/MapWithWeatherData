@@ -1,9 +1,10 @@
 import { LatLng } from "react-native-maps";
 import { AppDispatch } from '../../redux/store'; // Adjust path as necessary
-import { MarkerData, addMarker, applyPolygonCoordinate, buildSavedMarkersDataTexts } from '../../mapscreen/mapSlice'
+import { MarkerData, addMarker, applyPolygonCoordinate, buildSavedMarkersDataTexts, setDrawPolygonBtnState } from '../../mapscreen/mapSlice'
 import * as WeatherApi from '../api/WeatherApi'
 import uuid from 'react-native-uuid';
 import { getName } from 'country-list';
+import { DrawPolygonBtnState } from "../ui/redux/types";
 
 
 export const onMapLongPress = (coordinate: LatLng) => {
@@ -19,8 +20,8 @@ export const onMapLongPress = (coordinate: LatLng) => {
       //getName might return undefined, if it does, don't apply its result, otherwise do
       const result = getName(json.sys.country)
 
-      if(result != undefined) {
-          country = result
+      if (result != undefined) {
+        country = result
       }
 
     }
@@ -42,8 +43,15 @@ export const onMapLongPress = (coordinate: LatLng) => {
   }
 }
 
-export const addPolygonCoordinate = (polygonKey: string, coordinate: LatLng) => {
+export const addPolygonCoordinate = (polygonKey: string, coordinate: LatLng, isDrawPolygonsEnabled: boolean) => {
+
+
   return (dispatch: AppDispatch) => {
+    // if drawing polygons is disabled , return -> don't draw polygon
+    if (!isDrawPolygonsEnabled) {
+      return
+    }
+
     dispatch(
       applyPolygonCoordinate(
         {
@@ -96,4 +104,41 @@ const _buildSavedMarkersDataTexts = (markersData: { [key: string]: MarkerData })
   })
   return stringBuilder
 }
+
+export const onDrawPolygonBtnClick = (currentState: DrawPolygonBtnState) => {
+  return (dispatch: AppDispatch) => {
+    const newState = buildDrawPolygonButtonState(currentState)
+    console.log(currentState)
+    dispatch(
+      setDrawPolygonBtnState(
+        {
+          newState: newState
+        }
+      )
+    );
+  }
+}
+
+const buildDrawPolygonButtonState = (currentState: DrawPolygonBtnState) => {
+  let newState: DrawPolygonBtnState
+
+  if (currentState.isDrawPolygonsEnabled) {
+    newState = {
+      isDrawPolygonsEnabled: false,
+      backgroundColor: 'green',
+      description: "Enable polygon drawing"
+    }
+  }
+  else {
+    newState = {
+      isDrawPolygonsEnabled: true,
+      backgroundColor: 'red',
+      description: "Disable polygon drawing"
+    }
+  }
+
+  return newState
+}
+
+
 

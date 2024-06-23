@@ -1,11 +1,5 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import MapView, {
   LatLng,
   Marker,
@@ -16,33 +10,44 @@ import * as actions from '../actions/MapViewActions';
 import {useAppSelector, useAppDispatch} from '../../redux/reduxHooks';
 import {shallowEqual} from 'react-redux';
 import {RootState} from '../../redux/store';
-import {MapState, MarkerData, PolygonData} from '../mapSlice';
+import {MarkerData, PolygonData} from '../mapSlice';
 import type {AppDispatch} from '../../redux/store';
 import uuid from 'react-native-uuid';
 
 const MapScreen = ({navigation}: any) => {
   const dispatch: AppDispatch = useAppDispatch();
 
-  const {markers, polygons} = useAppSelector(
+  const {markers, polygons, drawPolygonBtnState} = useAppSelector(
     (state: RootState) => ({
       markers: state.mapSlice.markers,
       polygons: state.mapSlice.polygons,
+      drawPolygonBtnState: state.mapSlice.drawPolygonBtnState,
     }),
     shallowEqual,
   );
 
   const [polygonKey, setPolygonKey] = useState<string>(uuid.v4().toString());
-  
+
   //controls on apply polygon button , when false the view is invisible otherwise, visible
-  const [isApplyPolygonVisible, setApplyPolygonBtnVisibility] = useState<boolean>(false);
+  // const [isApplyPolygonVisible, setApplyPolygonBtnVisibility] =
+  //   useState<boolean>(false);
 
   const onApplyPolygonClick = () => {
-    setApplyPolygonBtnVisibility(false);
+    // setApplyPolygonBtnVisibility(false);
     setPolygonKey(uuid.v4().toString());
   };
 
-  const addPolygonCoordinate = (coordinate: LatLng) => {
-    dispatch(actions.addPolygonCoordinate(polygonKey, coordinate));
+  const addPolygonCoordinate = (
+    coordinate: LatLng,
+    isDrawPolygonsEnabled: boolean,
+  ) => {
+    dispatch(
+      actions.addPolygonCoordinate(
+        polygonKey,
+        coordinate,
+        isDrawPolygonsEnabled,
+      ),
+    );
   };
 
   const drawMarkers = (markersData: {[key: string]: MarkerData}) => {
@@ -72,8 +77,8 @@ const MapScreen = ({navigation}: any) => {
 
   const onMapDoublePress = (coordinate: LatLng) => {
     //show apply polygon button
-    setApplyPolygonBtnVisibility(true);
-    addPolygonCoordinate(coordinate);
+    // setApplyPolygonBtnVisibility(true);
+    addPolygonCoordinate(coordinate, drawPolygonBtnState.isDrawPolygonsEnabled);
   };
 
   const onSavedMarkersBtnClick = () => {
@@ -86,7 +91,8 @@ const MapScreen = ({navigation}: any) => {
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
-        zoomEnabled={false}
+        // this solves the problem of: double tap on map draws polygon and zooming at the same time
+        zoomEnabled={!drawPolygonBtnState.isDrawPolygonsEnabled}
         onDoublePress={event => {
           onMapDoublePress(event.nativeEvent.coordinate);
         }}
@@ -102,7 +108,7 @@ const MapScreen = ({navigation}: any) => {
         <Text
           style={[
             styles.polygonApplyButton,
-            {opacity: isApplyPolygonVisible ? 1 : 0},
+            // {opacity: isApplyPolygonVisible ? 1 : 0},
           ]}
           onPress={() => {
             onApplyPolygonClick();
@@ -116,6 +122,17 @@ const MapScreen = ({navigation}: any) => {
           Saved Data
         </Text>
       </View>
+
+      <Text
+        style={[
+          styles.applyPolygonBtn,
+          {backgroundColor: drawPolygonBtnState.backgroundColor},
+        ]}
+        onPress={() =>
+          dispatch(actions.onDrawPolygonBtnClick(drawPolygonBtnState))
+        }>
+        {drawPolygonBtnState.description}
+      </Text>
     </View>
   );
 };
@@ -132,6 +149,21 @@ const styles = StyleSheet.create({
     height: '100%',
     pointerEvents: 'box-only',
   },
+  applyPolygonBtn: {
+    position: 'absolute',
+    elevation: 1,
+    height: 'auto',
+    paddingVertical: 10,
+    width: '30%',
+    borderRadius: 50,
+    backgroundColor: 'green',
+    marginTop: 10,
+    marginStart: 10,
+    opacity: 0.8,
+    textAlign: 'center',
+    color: 'white',
+  },
+
   buttonsWrapper: {
     display: 'flex',
     flex: 1,
@@ -143,7 +175,8 @@ const styles = StyleSheet.create({
   polygonApplyButton: {
     borderRadius: 10,
     width: '30%',
-    height: 40,
+    height: 'auto',
+    paddingVertical: 10,
     backgroundColor: 'blue',
     textAlign: 'center',
     color: 'white',
@@ -155,7 +188,8 @@ const styles = StyleSheet.create({
   savedMarkersBtn: {
     borderRadius: 10,
     width: '30%',
-    height: 40,
+    height: 'auto',
+    paddingVertical: 10,
     backgroundColor: 'blue',
     textAlign: 'center',
     color: 'white',
