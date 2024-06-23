@@ -1,4 +1,10 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import MapView, {
   LatLng,
@@ -12,12 +18,12 @@ import {shallowEqual} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {MapState, MarkerData, PolygonData} from '../mapSlice';
 import type {AppDispatch} from '../../redux/store';
-import PolygonState from './types/PolygonStateType';
 import uuid from 'react-native-uuid';
 
-const MapScreen = () => {
+const MapScreen = ({navigation}: any) => {
   const dispatch: AppDispatch = useAppDispatch();
-  const {markers, polygons}: MapState = useAppSelector(
+
+  const {markers, polygons} = useAppSelector(
     (state: RootState) => ({
       markers: state.mapSlice.markers,
       polygons: state.mapSlice.polygons,
@@ -26,8 +32,12 @@ const MapScreen = () => {
   );
 
   const [polygonKey, setPolygonKey] = useState<string>(uuid.v4().toString());
+  
+  //controls on apply polygon button , when false the view is invisible otherwise, visible
+  const [isApplyPolygonVisible, setApplyPolygonBtnVisibility] = useState<boolean>(false);
 
   const onApplyPolygonClick = () => {
+    setApplyPolygonBtnVisibility(false);
     setPolygonKey(uuid.v4().toString());
   };
 
@@ -46,36 +56,39 @@ const MapScreen = () => {
   };
 
   const drawPolygons = (polygons: {[key: string]: PolygonData[]}) => {
-    console.log(polygons);
     const polygonElements: React.ReactElement[] = [];
 
-     Object.keys(polygons).map(polygonKey => {
+    Object.keys(polygons).map(polygonKey => {
       const coordinates = polygons[polygonKey].map((data, index) => {
         return data.coordinate;
       });
       polygonElements.push(
         <Polygon key={polygonKey} coordinates={coordinates} />,
-      )
-    })
-    
-    return polygonElements
+      );
+    });
+
+    return polygonElements;
+  };
+
+  const onMapDoublePress = (coordinate: LatLng) => {
+    //show apply polygon button
+    setApplyPolygonBtnVisibility(true);
+    addPolygonCoordinate(coordinate);
+  };
+
+  const onSavedMarkersBtnClick = () => {
+    dispatch(actions.dispatchSavedMarkersDataTexts(markers));
+    navigation.navigate('MarkersData');
   };
 
   return (
-    <View>
-      <Text
-        style={styles.polygonApplyButton}
-        onPress={() => {
-          onApplyPolygonClick();
-        }}>
-        Apply Polygon
-      </Text>
-
+    <View style={styles.container}>
       <MapView
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+        provider={PROVIDER_GOOGLE}
         style={styles.map}
+        zoomEnabled={false}
         onDoublePress={event => {
-          addPolygonCoordinate(event.nativeEvent.coordinate);
+          onMapDoublePress(event.nativeEvent.coordinate);
         }}
         onLongPress={event => {
           dispatch(actions.onMapLongPress(event.nativeEvent.coordinate));
@@ -84,6 +97,25 @@ const MapScreen = () => {
 
         {drawPolygons(polygons)}
       </MapView>
+
+      <View style={styles.buttonsContainer}>
+        <Text
+          style={[
+            styles.polygonApplyButton,
+            {opacity: isApplyPolygonVisible ? 1 : 0},
+          ]}
+          onPress={() => {
+            onApplyPolygonClick();
+          }}>
+          Apply Polygon
+        </Text>
+
+        <Text
+          style={styles.savedMarkersBtn}
+          onPress={() => onSavedMarkersBtnClick()}>
+          Saved Data
+        </Text>
+      </View>
     </View>
   );
 };
@@ -93,18 +125,53 @@ export default MapScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
   },
   map: {
     width: '100%',
     height: '100%',
+    pointerEvents: 'box-only',
+  },
+  buttonsWrapper: {
+    display: 'flex',
+    flex: 1,
+    position: 'absolute',
+    elevation: 1,
+    width: '100%',
+    height: '100%',
   },
   polygonApplyButton: {
+    borderRadius: 10,
     width: '30%',
-    height: 50,
+    height: 40,
     backgroundColor: 'blue',
     textAlign: 'center',
     color: 'white',
     alignSelf: 'center',
     textAlignVertical: 'center',
+    pointerEvents: 'box-none',
+  },
+
+  savedMarkersBtn: {
+    borderRadius: 10,
+    width: '30%',
+    height: 40,
+    backgroundColor: 'blue',
+    textAlign: 'center',
+    color: 'white',
+    alignSelf: 'center',
+    textAlignVertical: 'center',
+    pointerEvents: 'box-none',
+  },
+
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 'auto',
+    elevation: 1,
+    width: 'auto',
+    height: 'auto',
+    marginBottom: 20,
   },
 });
