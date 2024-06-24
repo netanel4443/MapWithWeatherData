@@ -13,6 +13,7 @@ weather api like: temperature , feels like temperature, country
 - clicking on a marker shows location's temperature
 - 
 ## Installation Instructions
+- make sure that you use minimum jdk 17
 1) make sure you are on project's destination . if not navigate to project destination -> via terminal 
     (or any destination that navigates you to MapWithWeatherData)
  ```bash
@@ -84,8 +85,8 @@ in order to draw markers, long click on a the map
 <img src="https://github.com/netanel4443/MapWithWeatherData/assets/50371425/cda5b4cc-ecf9-4242-ad08-5f32df54eb1e" width="200" height="400" />
 <img src="https://github.com/netanel4443/MapWithWeatherData/assets/50371425/370e49b9-7bb7-46c2-a4bc-e2b00ce75b49" width="200" height="400" />
 
- # Additional Notes
- Evaluation Criteria:
+
+# Evaluation Criteria:
 Completeness: Does the application meet all the requirements? ```yes```
 
 Code Quality: Is the code clean, well-documented, and follows best practices? 
