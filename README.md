@@ -5,7 +5,7 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 2) then type in terminal **npm start** which will start the metro server
 3) press **a** on terminal (node) to install the app
 
-# in case of error while pressing a to install the app
+# in case of error while pressing `a` to install the app
 
 1)**close metro server** - this step is crucial
 
