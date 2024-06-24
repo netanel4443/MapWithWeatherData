@@ -61,7 +61,15 @@ congratulations! you can interact with the app !
 
 if you still got errors please contact me . 
 
-# Usage Instructions
-### drawing polygon
+## Usage Instructions
+
+### drawing markers
+
+in order to draw markers, long click on a the map
+
+### drawing polygons
+1) click on the green button `enable polygon drawing` - it will changed to red
+2) double click on more than 1 location in order to see polygon lines on the map.
+3) in order to finish drawing the polygon, click on apply polygon button, after that you can draw a new polygon shape.
 
 
