@@ -6,6 +6,7 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 then press a on terminal (node) to install the app
 
 **in case of error while pressing a to install the app**
+
 1)**close metro server** - this step is crucial
 
 2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  *cd android*
