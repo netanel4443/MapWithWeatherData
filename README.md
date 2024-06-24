@@ -81,6 +81,8 @@ in order to draw markers, long click on a the map
   
  ## Screenshots of the application
  ![Screenshot_1719256318](https://github.com/netanel4443/MapWithWeatherData/assets/50371425/cda5b4cc-ecf9-4242-ad08-5f32df54eb1e)
+ ![Screenshot_1719256323](https://github.com/netanel4443/MapWithWeatherData/assets/50371425/370e49b9-7bb7-46c2-a4bc-e2b00ce75b49)
+
 
 
  # Additional Notes
