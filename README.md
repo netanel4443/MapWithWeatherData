@@ -1,13 +1,13 @@
 # Getting Started
-1) make sure you are on project's destination . if not navigate to project destination -> via terminal
+1) make sure you are on project's destination . if not navigate to project destination -> via
    
  ```bash
     cd MapWithWeatherData
 ```
-  (or any destination that navigates you to MapWithWeatherData) or any other way you desire to get to MapWithWeatherData folder
+5)  (or any destination that navigates you to MapWithWeatherData) or any other way you desire to get to MapWithWeatherData folder
 
-2) then type in terminal ```bash npm start ``` which will start the metro server
-3) press  ```bash a``` on terminal (node) to install the app
+6) then type in terminal ```npm start``` which will start the metro server
+7) press  ```a``` on terminal (node) to install the app
 
 # in case of error while pressing `a` to install the app
 
@@ -23,12 +23,12 @@
    
    ## after typing in terminal *`./gradlew clean`* got error
    
-   if after typing  ```bash ./gradlew clean``` you got an error , make sure that you closed the metro server. 
-   then run again the command ```bash ./gradlew clean``` (if you closed metro server, run this command anyways) it should now build successfully
+   if after typing  ```./gradlew clean``` you got an error , make sure that you closed the metro server. 
+   then run again the command ```./gradlew clean``` (if you closed metro server, run this command anyways) it should now build successfully
 
-4) type ```bash cd..``` in terminal to return to MapWithWeatherData directory
-5) type in terminal ```bash npm start``` which will start metro server
-6) press ```bash a``` in terminal when **dev server ready*** that will install the app 
+4) type ```cd..``` in terminal to return to MapWithWeatherData directory
+5) type in terminal ```npm start``` which will start metro server
+6) press ```a``` in terminal when **dev server ready*** that will install the app 
 
 congratulations! you can interact with the app !
 
