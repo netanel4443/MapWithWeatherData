@@ -85,6 +85,8 @@ in order to draw markers, long click on a the map
 <img src="https://github.com/netanel4443/MapWithWeatherData/assets/50371425/cda5b4cc-ecf9-4242-ad08-5f32df54eb1e" width="200" height="400" />
 <img src="https://github.com/netanel4443/MapWithWeatherData/assets/50371425/370e49b9-7bb7-46c2-a4bc-e2b00ce75b49" width="200" height="400" />
 
+# Additional Notes
+  for the project I used emulators with sdk 34 
 
 # Evaluation Criteria:
 Completeness: Does the application meet all the requirements? ```yes```
