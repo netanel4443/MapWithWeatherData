@@ -12,14 +12,14 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  *cd android*
    then type :  *./gradlew clean* (and press enter) it should  build successfully
    
-   ## after typing *./gradlew clean* got error
+   ## after typing in terminal `*./gradlew clean*` got error
    
-   if after typing **./gradlew clean** throws error , make sure that you closed the metro server. 
+   if after typing **./gradlew clean** you got an error , make sure that you closed the metro server. 
    then run again the command **./gradlew clean** (if you closed metro server, run this command anyways) it should now build successfully
 
-4) type cd.. in terminal to return to MapWithWeatherData directory
-5) type in terminal npm start which will start metro server
-6) press a when *dev server ready*
+4) type **cd..** in terminal to return to MapWithWeatherData directory
+5) type in terminal **npm start** which will start metro server
+6) press a when **dev server ready*** that will install the app 
 
 congratulations! you can interact with the app !
 
