@@ -6,6 +6,11 @@ An app that allows use to draw polygons and place markers on the map
 the user can view his markers record in a seperate screen with additional details obtained from
 weather api like: temperature , feels like temperature, country
 
+# Features
+- placing markers on the map
+- drawing polygons on the map
+- a seperate screen that the user can view his markers recording with weather data
+- clicking on a marker shows location's temperature
 # Getting Started
 1) make sure you are on project's destination . if not navigate to project destination -> via terminal 
     (or any destination that navigates you to MapWithWeatherData)
