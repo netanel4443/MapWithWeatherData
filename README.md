@@ -24,7 +24,11 @@
    ## after typing in terminal *`./gradlew clean`* got error
    
    if after typing  ```./gradlew clean``` you got an error , make sure that you closed the metro server. 
-   then run again the command ```./gradlew clean``` (if you closed metro server, run this command anyways) it should now build successfully
+   then run again the command:
+   ```bash
+   ./gradlew clean
+   ```
+    (if you closed metro server, run this command anyways) it should now build successfully
 
 4) type ```cd..``` in terminal to return to MapWithWeatherData directory
 5) type in terminal ```npm start``` which will start metro server
