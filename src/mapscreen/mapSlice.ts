@@ -64,7 +64,6 @@ const mapSlice = createSlice({
         newState.polygons[action.payload.polygonKey] = polygon
       }
      
-      console.log(newState.polygons)
       polygon.push({
         coordinate: action.payload.coordinate,
         key: action.payload.coordinateKey

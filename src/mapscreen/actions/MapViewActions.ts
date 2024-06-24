@@ -5,10 +5,10 @@ import * as WeatherApi from '../api/WeatherApi'
 import uuid from 'react-native-uuid';
 import { getName } from 'country-list';
 import { DrawPolygonBtnState } from "../ui/redux/types";
+import Geolocation from 'react-native-geolocation-service';
 
 
 export const onMapLongPress = (coordinate: LatLng) => {
-  console.log(coordinate)
   return async (dispatch: AppDispatch) => {
 
     const temp = await WeatherApi.fetchWeather(coordinate)
@@ -223,6 +223,26 @@ export const drawMockedMarkers = () => {
     dispatch(onMapLongPress({ "latitude": 53.10742158711122, "longitude": -1.5064911916851997 }))
     dispatch(onMapLongPress({ "latitude": 66.44530904202563, "longitude": 19.726979099214077 }))
     dispatch(onMapLongPress({ "latitude": 27.710254964973107, "longitude": -81.5471188724041 }))
+  }
+}
+
+export const drawUserCurrentLocation = () => {
+  return (dispatch: AppDispatch) => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        const coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }
+
+        dispatch(onMapLongPress(coordinates))
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
   }
 }
 

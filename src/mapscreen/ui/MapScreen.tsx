@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import MapView, {
   LatLng,
@@ -13,6 +13,9 @@ import {RootState} from '../../redux/store';
 import {MarkerData, PolygonData} from '../mapSlice';
 import type {AppDispatch} from '../../redux/store';
 import uuid from 'react-native-uuid';
+import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
+import {resetCache} from '../../../metro.config';
+import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = ({navigation}: any) => {
   const dispatch: AppDispatch = useAppDispatch();
@@ -27,11 +30,29 @@ const MapScreen = ({navigation}: any) => {
   );
 
   useEffect(() => {
-    dispatch(actions.drawMockedData());
-    // dispatch(actions.drawMockedMarkers());
-  }, []);
-  
+    const requestLocationPermission = async () => {
+      let permission;
+      if (Platform.OS === 'ios') {
+        permission = PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
+      } else if (Platform.OS === 'android') {
+        permission = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+      }
 
+      if (permission != undefined) {
+        const requestResult = await request(permission);
+     
+        if (
+          requestResult == RESULTS.GRANTED ||
+          requestResult == RESULTS.LIMITED
+        ) {
+          dispatch(actions.drawUserCurrentLocation());
+        }
+      }
+    };
+    requestLocationPermission();
+
+    dispatch(actions.drawMockedData());
+  }, []);
 
   const [polygonKey, setPolygonKey] = useState<string>(uuid.v4().toString());
 
@@ -96,6 +117,7 @@ const MapScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <MapView
+        showsUserLocation={true}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         // this solves the problem of: double tap on map draws polygon and zooming at the same time
