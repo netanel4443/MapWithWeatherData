@@ -84,7 +84,7 @@ in order to draw markers, long click on a the map
 Completeness: Does the application meet all the requirements? ```yes```
 
 Code Quality: Is the code clean, well-documented, and follows best practices? 
-.```
+z ```
 yes. used react redux toolkit for state management.
 used clean code, and simple logic in functions to get good design. in addition, I placed the files in separated directories according to the needs
  ```
