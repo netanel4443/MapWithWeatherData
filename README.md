@@ -9,10 +9,10 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 
 1)**close metro server** - this step is crucial
 
-2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  *cd android*
-   then type :  *./gradlew clean* (and press enter) it should  build successfully
+2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  **cd android**
+   then type :  **./gradlew clean** (and press enter) it should  build successfully
    
-   ## after typing in terminal `*./gradlew clean*` got error
+   ## after typing in terminal *`./gradlew clean`* got error
    
    if after typing **./gradlew clean** you got an error , make sure that you closed the metro server. 
    then run again the command **./gradlew clean** (if you closed metro server, run this command anyways) it should now build successfully
@@ -22,4 +22,6 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 6) press a when **dev server ready*** that will install the app 
 
 congratulations! you can interact with the app !
+
+if you still got errors please contact me . 
 
