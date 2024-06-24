@@ -78,6 +78,10 @@ in order to draw markers, long click on a the map
 - for the map, used, https://console.cloud.google.com/ maps sdk for android
 - for weather api, used : https://openweathermap.org/.
   the api key is already within the app, no need to add yours(if you got any restrictions (you should not have) please contact me).
+  
+ ## Screenshots of the application
+ ![Screenshot_1719256318](https://github.com/netanel4443/MapWithWeatherData/assets/50371425/cda5b4cc-ecf9-4242-ad08-5f32df54eb1e)
+
 
  # Additional Notes
  Evaluation Criteria:
