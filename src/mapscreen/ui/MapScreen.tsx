@@ -26,6 +26,13 @@ const MapScreen = ({navigation}: any) => {
     shallowEqual,
   );
 
+  useEffect(() => {
+    dispatch(actions.drawMockedData());
+    // dispatch(actions.drawMockedMarkers());
+  }, []);
+  
+
+
   const [polygonKey, setPolygonKey] = useState<string>(uuid.v4().toString());
 
   //controls on apply polygon button , when false the view is invisible otherwise, visible
@@ -42,7 +49,7 @@ const MapScreen = ({navigation}: any) => {
     isDrawPolygonsEnabled: boolean,
   ) => {
     dispatch(
-      actions.addPolygonCoordinate(
+      actions.addPolygonCoordinateIfAllowed(
         polygonKey,
         coordinate,
         isDrawPolygonsEnabled,

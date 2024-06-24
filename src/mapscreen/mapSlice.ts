@@ -63,7 +63,8 @@ const mapSlice = createSlice({
         polygon = []
         newState.polygons[action.payload.polygonKey] = polygon
       }
-
+     
+      console.log(newState.polygons)
       polygon.push({
         coordinate: action.payload.coordinate,
         key: action.payload.coordinateKey
@@ -78,10 +79,26 @@ const mapSlice = createSlice({
       //apply new state
       state = newState
     },
-    
+
     setDrawPolygonBtnState: (state, action: PayloadAction<{newState: DrawPolygonBtnState}>) => {
       const newState = Object.assign(state) as MapState
       newState.drawPolygonBtnState = action.payload.newState
+
+      state = newState
+    },
+
+    setMockedPolygons: (state, action: PayloadAction<{polygons: { [key: string]: PolygonData[]; } }>) => {
+      const newState = Object.assign(state) as MapState
+
+      newState.polygons = action.payload.polygons
+
+      state = newState
+    },
+       
+    setMockedMarkers: (state, action: PayloadAction<{ markers: { [key: string]: MarkerData } }>) => {
+      const newState = Object.assign(state) as MapState
+
+      newState.markers = action.payload.markers
 
       state = newState
     }
@@ -92,7 +109,9 @@ export const {
   addMarker,
   applyPolygonCoordinate,
   buildSavedMarkersDataTexts,
-  setDrawPolygonBtnState
+  setDrawPolygonBtnState,
+  setMockedPolygons,
+  setMockedMarkers
 } = mapSlice.actions;
 
 export default mapSlice.reducer
