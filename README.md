@@ -16,7 +16,8 @@
 2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  
  
    ```bash
-   cd android // then type:
+   cd android
+    #  then type:
     ./gradlew clean
    ```
    (and press enter) it should  build successfully
