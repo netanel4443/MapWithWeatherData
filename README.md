@@ -1,10 +1,10 @@
 # Getting Started
-1) make sure you are on project's destination . if not navigate to project destination -> via
-   
+1) make sure you are on project's destination . if not navigate to project destination -> via terminal 
+    (or any destination that navigates you to MapWithWeatherData)
  ```bash
     cd MapWithWeatherData
 ```
-2)  (or any destination that navigates you to MapWithWeatherData) or any other way you desire to get to MapWithWeatherData folder
+  or any other way you desire to get to MapWithWeatherData folder
 
 3) then type in terminal
 ```bash
