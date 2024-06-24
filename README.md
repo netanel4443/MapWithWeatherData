@@ -10,7 +10,9 @@ via **cd MapWithWeatherData** (or any destination that navigates you to MapWithW
 1)**close metro server** - this step is crucial
 
 2) open a new terminal and navigate from /MapWithWeatherData to android directory by typing (then press enter) :  **cd android**
-   then type : ```bash **./gradlew clean** (and press enter) it should  build successfully
+   then type :
+   ```bash **./gradlew clean**
+   (and press enter) it should  build successfully
    
    ## after typing in terminal *`./gradlew clean`* got error
    
