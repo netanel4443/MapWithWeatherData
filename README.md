@@ -1,13 +1,13 @@
 # Getting Started
-1) make sure you are on project's destination . if not navigate to project destination -> via
+1) make sure you are on project's destination . if not navigate to project destination -> via terminal
    
  ```bash
     cd MapWithWeatherData
 ```
-5)  (or any destination that navigates you to MapWithWeatherData) or any other way you desire to get to MapWithWeatherData folder
+  (or any destination that navigates you to MapWithWeatherData) or any other way you desire to get to MapWithWeatherData folder
 
-6) then type in terminal ```bash npm start ``` which will start the metro server
-7) press  ```bash a``` on terminal (node) to install the app
+2) then type in terminal ```bash npm start ``` which will start the metro server
+3) press  ```bash a``` on terminal (node) to install the app
 
 # in case of error while pressing `a` to install the app
 
