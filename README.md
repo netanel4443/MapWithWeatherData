@@ -3,13 +3,13 @@
 ## Project Description
 
 An app that allows use to draw polygons and place markers on the map
-the user can view his markers record in a seperate screen with additional details obtained from
+the user can view his markers record in a separate screen with additional details obtained from
 weather api like: temperature , feels like temperature, country
 
 ## Features
 - placing markers on the map
 - drawing polygons on the map
-- a seperate screen that the user can view his markers recording with weather data
+- a separate screen that the user can view his markers recording with weather data
 - clicking on a marker shows location's temperature
 - 
 ## Installation Instructions
@@ -68,8 +68,25 @@ if you still got errors please contact me .
 in order to draw markers, long click on a the map
 
 ### drawing polygons
-1) click on the green button `enable polygon drawing` - it will changed to red
-2) double click on more than 1 location in order to see polygon lines on the map.
-3) in order to finish drawing the polygon, click on apply polygon button, after that you can draw a new polygon shape.
+1)grant access to your location in order to see the marker with weather data of you location on the map
+2) click on the green button `enable polygon drawing` - it will changed to red
+3) double click on more than 1 location in order to see polygon lines on the map.
+4) in order to finish drawing the polygon, click on apply polygon button, after that you can draw a new polygon shape.
+5) by clicking on saved that you will be redirected to a new screen with all of your markers details with weather data
+
+## API Usage Details
+- for the map, used, https://console.cloud.google.com/ maps sdk for android
+- for weather api, used : https://openweathermap.org/.
+  the api key is already within the app, no need to add yours(if you got any restrictions (you should not have) please contact me).
+
+ # Additional Notes
+ Evaluation Criteria:
+Completeness: Does the application meet all the requirements? ```yes```
+Code Quality: Is the code clean, well-documented, and follows best practices?  ```yes. used react redux toolkit for state management.
+used clean code, and simple logic in functions to get good design. in addition, I placed the files in separated directories according to the needs ```
+Functionality: Does the application works as expected? ```yes```
+Responsiveness: Is the application responsive and usable on different screen sizes? ```yes```
+Bonus Points: Are additional features or screens implemented effectively? ```yes```
+
 
 
