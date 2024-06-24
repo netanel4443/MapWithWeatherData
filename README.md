@@ -14,7 +14,7 @@ weather api like: temperature , feels like temperature, country
 - 
 ## Installation Instructions
 - make sure that you use minimum jdk 17
-- 
+
 1) make sure you are on project's destination . if not navigate to project destination -> via terminal 
     (or any destination that navigates you to MapWithWeatherData)
  ```bash
