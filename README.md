@@ -17,9 +17,12 @@
  
    ```bash
    cd android
-    #  then type:
-    ./gradlew clean
    ```
+   then type:
+   
+    ```bash
+    ./gradlew clean
+    ```
    (and press enter) it should  build successfully
    
    ## after typing in terminal *`./gradlew clean`* got error
