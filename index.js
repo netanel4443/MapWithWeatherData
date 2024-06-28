@@ -6,32 +6,10 @@ import {store} from './src/redux/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SavedDataScreen from './src/saveddatascreen/SavedDataScreen';
-import { useEffect } from 'react';
-import { PERMISSIONS, request } from 'react-native-permissions';
-
 
 const Stack = createNativeStackNavigator();
 
-
-
-
-
 const app = () => {
-
-  useEffect(() => {
-    const requestLocationPermission = async () => {
-      let permission;
-      if (Platform.OS === 'ios') {
-        permission = PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
-      } else if (Platform.OS === 'android') {
-        permission = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
-      }
-      const requestResult = await request(permission).t;
-      
-    }
-     requestLocationPermission()
-   
-}, []);
 
   return (
     <Provider store={store}>
