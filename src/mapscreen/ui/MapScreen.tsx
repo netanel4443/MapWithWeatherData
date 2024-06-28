@@ -1,5 +1,5 @@
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import MapView, {
   LatLng,
   Marker,
@@ -54,7 +54,7 @@ const MapScreen = ({navigation}: any) => {
     dispatch(actions.drawMockedData());
   }, []);
 
-  const [polygonKey, setPolygonKey] = useState<string>(uuid.v4().toString());
+  const polygonKey = useRef<string>(uuid.v4().toString());
 
   //controls on apply polygon button , when false the view is invisible otherwise, visible
   // const [isApplyPolygonVisible, setApplyPolygonBtnVisibility] =
@@ -62,7 +62,7 @@ const MapScreen = ({navigation}: any) => {
 
   const onApplyPolygonClick = () => {
     // setApplyPolygonBtnVisibility(false);
-    setPolygonKey(uuid.v4().toString());
+    polygonKey.current = uuid.v4().toString();
   };
 
   const addPolygonCoordinate = (
@@ -71,7 +71,7 @@ const MapScreen = ({navigation}: any) => {
   ) => {
     dispatch(
       actions.addPolygonCoordinateIfAllowed(
-        polygonKey,
+        polygonKey.current,
         coordinate,
         isDrawPolygonsEnabled,
       ),
